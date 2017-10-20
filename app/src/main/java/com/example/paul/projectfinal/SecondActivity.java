@@ -14,6 +14,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+/*
+ * File: SecondActivity.java
+ * Last edited: 20-10-2017
+ * By: Paul Heijen
+ *
+ * This activity deals with user authentiction. It has
+ * two fields where a email and a password can be filled in.
+ * Below that are two buttons, one for logging in, one for registering */
 
 public class SecondActivity extends AppCompatActivity {
 
@@ -52,7 +60,6 @@ public class SecondActivity extends AppCompatActivity {
                 // ...
             }
         };
-//        createUser();
     }
 
     @Override

@@ -1,8 +1,11 @@
 package com.example.paul.projectfinal;
 
-/**
- * Created by Paul on 19/10/2017.
- */
+/*
+ * File: atmEntry.java
+ * Last edited: 20-10-2017
+ * By: Paul Heijen
+ *
+ * Model class for an ATM Entry */
 
 public class atmEntry {
 
@@ -11,23 +14,19 @@ public class atmEntry {
     public String coordinaten;
     public String bank;
 
+    //default contructor (required for firebase)
     public atmEntry() {
 
     }
 
-
+    //contructor
     public atmEntry (String aid, String astraatNaam, String acoordinaten, String aBank){
         this.id=aid;
         this.straatNaam = astraatNaam;
         this.coordinaten = acoordinaten;
         this.bank = aBank;
     }
-//    //default constructor
-//    public atmEntry (String astraatNaam, String acoordinaten){
-//        this.straatNaam = astraatNaam;
-//        this.coordinaten = acoordinaten;
-////        this.Bank = aBank;
-//    }
+
 
     public void setID(String aid) {
         this.id = aid;

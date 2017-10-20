@@ -10,6 +10,18 @@ import android.view.View;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
+/*
+ * File: MainActivity.java
+ * Last edited: 20-10-2017
+ * By: Paul Heijen
+ *
+ * The first screen of the app shows a welcome greeting plus an iconic picture. On
+ * the bottom is a continue button that can be used to go to the database. If a user
+ * is allready logged in this will immediately happen when pressed. If not, one shall
+ * be redirected to a login/register activity */
+
+
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -25,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setListener();
     }
 
+    // this method checks if a user is allready logged in.
     public void setListener() {
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -53,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //method triggered by onclick of continue button. Dependant on login status, user will be directed to next activity.
     public void goToSecondMain(View view) {
 
         if(checkSign) {

@@ -22,6 +22,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+ * File: ShowDatabaseActivity.java
+ * Last edited: 20-10-2017
+ * By: Paul Heijen
+ *
+ * This activity shows the current state of the
+ * ATM database in a listview. The ATM entries are listed by their ID.
+ * ATM entries can be expanded by longclicks. */
+
 public class ShowDatabaseActivity extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
@@ -47,6 +56,7 @@ public class ShowDatabaseActivity extends AppCompatActivity {
         listenToLongClicks();
     }
 
+    //Verifies if user is still logged in
     private void setListener() {
         authListenerTest = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -61,7 +71,7 @@ public class ShowDatabaseActivity extends AppCompatActivity {
             }
         };
     }
-
+    // method that signs out a user (triggered by button)
     public void signOut (View view) {
         user = null;
         mAuth.signOut();
@@ -69,6 +79,7 @@ public class ShowDatabaseActivity extends AppCompatActivity {
         setListener();
     }
 
+    //method that creates an adapter to link the listview to the list.
     public void makeAtmListAdapter() {
         arrayAdapter = new ArrayAdapter<>
                 (this, android.R.layout.simple_list_item_1, android.R.id.text1, atmIDlist);
@@ -77,6 +88,7 @@ public class ShowDatabaseActivity extends AppCompatActivity {
         atmlistview.setAdapter(arrayAdapter);
     }
 
+    //method that converts the raw data from the database in the corresponding model classes
     public void makeAtmIdList(Map<String, Object> atmsMap) {
 
         for (Map.Entry<String, Object> entry : atmsMap.entrySet()) {
@@ -91,10 +103,10 @@ public class ShowDatabaseActivity extends AppCompatActivity {
             atmlist.add(newEntry);
             atmIDlist.add(atmID);
         }
-//        Log.d("nog lekker", (atmlist.toString()));
         arrayAdapter.notifyDataSetChanged();
     }
 
+    //method that listens to long clicks
     public void listenToLongClicks() {
         atmlistview.setClickable(true);
         atmlistview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -106,17 +118,19 @@ public class ShowDatabaseActivity extends AppCompatActivity {
         });
     }
 
+    //method, invoked by long click, that redirects a user to the longclicked atm entry
     public void viewItem(int pos) {
         atmEntry entryToView = atmlist.get(pos);
-        goToShowRouteActivity(entryToView);
+        goToShowDatabaseEntryActivity(entryToView);
     }
 
+    //method that loads raw data from firebase
     public void getAtmsFromDB() {
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Map<String, Object> atmsMap = (HashMap<String, Object>) dataSnapshot.child("atms").getValue();
-                Log.d("nog lekker", ("HASH MAP DUMP: " + atmsMap.toString()));
+                Log.d("DATABASE:", ("HASH MAP DUMP: " + atmsMap.toString()));
                 makeAtmIdList(atmsMap);
 
             }
@@ -129,7 +143,8 @@ public class ShowDatabaseActivity extends AppCompatActivity {
         mDatabase.addValueEventListener(postListener);
     }
 
-    public void goToShowRouteActivity(atmEntry atmEntry) {
+    //method that loads teh ectivity that shows all information of one single atm entry. All neccecary information is added.
+    public void goToShowDatabaseEntryActivity(atmEntry atmEntry) {
         Intent atmIntent = new Intent(this, ShowDatabaseEntryActivity.class);
         atmIntent.putExtra("id", atmEntry.getID());
         atmIntent.putExtra("straatNaam", atmEntry.getstraatNaam());

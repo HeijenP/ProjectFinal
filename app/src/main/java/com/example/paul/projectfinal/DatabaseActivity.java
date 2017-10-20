@@ -25,36 +25,35 @@ import org.w3c.dom.Text;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+ * File: DatabaseActivity.java
+ * Last edited: 20-10-2017
+ * By: Paul Heijen
+ *
+ * This activity allows an user to add an atm entry to the database. */
+
 public class DatabaseActivity extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authListenerTest;
     private FirebaseUser user;
-//    private int count;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
 
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference("message");
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         setListener();
-
-//        updateCounter();
-
-//        Log.d("count3", mDatabase.child("counter"));
-
-         ;
-
-
-//        myRef.setValue("Hello, World!");
     }
 
+    //method that verifies if a user is still logged in
     private void setListener() {
         authListenerTest = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -70,21 +69,19 @@ public class DatabaseActivity extends AppCompatActivity {
         };
     }
 
+    //method that, if not logged in, redirects a user to login/register activity.
     public void goToRegisterLoginActivity() {
         Intent firstIntent = new Intent(this, SecondActivity.class);
         this.startActivity(firstIntent);
     }
 
+    //method that takes input from the user, in the form of edittexts, and puts this into the
+    // firebase database, if all fields are filled in.
     public void addToDb(View view){
         EditText et1 = (EditText) findViewById(R.id.editText);
         EditText et2 = (EditText) findViewById(R.id.editText2);
         EditText et3 = (EditText) findViewById(R.id.editText3);
         EditText et4 = (EditText) findViewById(R.id.editText4);
-
-//        Editable eid = et1.getText();
-//        Editable estraatnaam = et2.getText();
-//        Editable ecoordinaten = et3.getText();
-//        Editable ebank = et4.getText();
 
         String id = et1.getText().toString();
         String straatnaam = et2.getText().toString();
@@ -107,57 +104,7 @@ public class DatabaseActivity extends AppCompatActivity {
         }
     }
 
-//    public boolean checkRequirements(String id, String straatnaam, String coordinaten, String bank){
-//        if()
-//    }
-
-//    public int updateCounter() {
-//        int count = 0;
-//        ValueEventListener postListener = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                int count = dataSnapshot.child("counter").getValue(Integer.class);
-//
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Log.d("ERROR", "NOT LOADED");
-//            }
-//        };
-//        mDatabase.addValueEventListener(postListener);
-//
-//        return count;
-//
-//    }
-
-//    public void updateCounter2() {
-//        mDatabase.child("counter").runTransaction(new Transaction.Handler() {
-//            @Override
-//            public Transaction.Result doTransaction(final MutableData currentData) {
-//                if (currentData.getValue() == null) {
-//                    currentData.setValue("0");
-//                } else {
-//                    String stringValue = (String) currentData.getValue();
-//                    int intValue = Integer.parseInt(stringValue);
-//                    int increasedIntValue = intValue + 1;
-//                    currentData.setValue(String.valueOf(increasedIntValue));
-//                }
-//                return Transaction.success(currentData);
-//            }
-//
-//            @Override
-//            public void onComplete(DatabaseError databaseError, boolean committed, DataSnapshot currentData) {
-//                if (databaseError != null) {
-//                    System.out.println("Firebase counter increment failed!");
-//                } else {
-//                    System.out.println("Firebase counter increment succeeded!");
-//                }
-//            }
-//        });
-//    }
-
+    // easy toast maker method
     public void makeToast(String msg) {
         Toast.makeText(DatabaseActivity.this, msg,
                 Toast.LENGTH_SHORT).show();

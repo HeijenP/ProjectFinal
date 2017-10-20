@@ -11,6 +11,13 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/*
+ * File: ShowDatabaseEntryActivity.java
+ * Last edited: 20-10-2017
+ * By: Paul Heijen
+ *
+ * This activity shows all teh details of a specific atm entry, longclicked in the listview of ShowDatabaseActivity..java */
+
 public class ShowDatabaseEntryActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authListenerTest;
     private FirebaseUser user;
