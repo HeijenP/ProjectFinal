@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ProjectFinal</string>
+    <string name="id">id</string>
+    <string name="straatnaam">straatNaam</string>
+    <string name="coords">coordinaten</string>
+    <string name="bank">bank</string>
+</resources>
